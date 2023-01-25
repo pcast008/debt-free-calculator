@@ -1,0 +1,35 @@
+.payment-history {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.payment-history-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.payment-history-detail {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-top: 0;
+}
+
+.payment-item {
+    border-top: 2px solid #FAF9F6;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.payment-history-button:hover {
+    cursor: pointer;
+}

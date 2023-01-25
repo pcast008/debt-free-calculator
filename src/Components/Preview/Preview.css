@@ -1,0 +1,26 @@
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+.preview-title {
+    font-weight: 700;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.balance-interest {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.preview-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
