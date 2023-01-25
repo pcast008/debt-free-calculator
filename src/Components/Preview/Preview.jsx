@@ -1,5 +1,5 @@
 import React from "react";
-import "./Preview.css"
+import "./Preview.css";
 
 class Preview extends React.Component {
     render() {
@@ -14,10 +14,11 @@ class Preview extends React.Component {
                     <div className="interest-payment">Interest Payment: ${this.props.interestPayment}</div>
                     <div className="min-req-principal">Minimum Required Principal: ${this.props.requiredPrincipal}</div>
                     <div className="min-req-payment">Minimum Required Payment: ${this.props.minRequiredPayment}</div>
+                    <div>Based on the loan amount, interest rate, and the minimum required payment, it'll take you about {this.props.paymentsRemaining} payment(s) to be debt-free.</div>
                 </div>
             </div>
         )
     }
 }
 
-export default Preview
+export default Preview;

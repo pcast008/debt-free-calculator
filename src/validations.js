@@ -40,12 +40,26 @@ function paymentValidation(value, balance, minRequiredPayment) {
     } else if (!value.match(valueRegex)) {
         return { errorText: "Invalid payment", valid: false };
 
-    } else if (Number(value) < Number(minRequiredPayment)) {
-        return { errorText: `Payment must be greater than ${minRequiredPayment}`, valid: false };
-        
-    } else if (Number(value) > Number(balance)) {
-        return { errorText: `Payment cannot be greater than ${balance}`, valid: false }; 
+    } else if (Number(balance) > 100) {
+        if (Number(value) > Number(balance)) {
+            return { errorText: `Payment cannot be greater than ${balance}`, valid: false };
+            
+        } else if (Number(value) < Number(minRequiredPayment)) {
+            return { errorText: `Payment must be greater than or equal to ${minRequiredPayment}`, valid: false };
+            
+        } else {
+            return { errorText: "", valid: true };
 
+        }
+
+    } else if (Number(balance) <= 100) {
+        if (Number(value) !== Number(minRequiredPayment)) {
+            return { errorText: `Payment must be equal to ${minRequiredPayment}`, valid: false };
+            
+        } else {
+            return { errorText: "", valid: true };
+
+        }
     } else {
         return { errorText: "", valid: true };
 

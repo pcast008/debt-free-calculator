@@ -1,9 +1,9 @@
 import React from "react";
-import "./Input.css"
+import "./Input.css";
 
 class Input extends React.Component {
     renderCheckMark = (valid) => {
-        return valid ? <i className="fa-solid fa-check"></i> : <i></i>
+        return valid ? <i className="fa-solid fa-check"></i> : <i></i>;
     }
 
     render() {
@@ -21,4 +21,4 @@ class Input extends React.Component {
     }
 }
 
-export default Input
+export default Input;

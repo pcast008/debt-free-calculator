@@ -4,6 +4,7 @@ import Form from './Components/Form/Form';
 import Preview from './Components/Preview/Preview';
 import PaymentHistory from './Components/PaymentHistory/PaymentHistory';
 import { interestValidation, paymentValidation, loanAmountValidation } from './validations';
+import { NPER } from '@formulajs/formulajs';
 
 class App extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class App extends React.Component {
             requiredPrincipal: 0,
             minRequiredPayment: 0,
             payments: [],
+            paymentsRemaining: 0,
             errors: {
                 loanError: "",
                 paymentError: "",
@@ -55,6 +57,12 @@ class App extends React.Component {
             }
         })
 
+        this.setState(state => {
+            return {
+                paymentsRemaining: Number(NPER(state.interest / 100 / 12, -state.minRequiredPayment, state.balance)).toFixed(0)
+            }
+        })
+
         e.target["loanAmount"].parentElement.classList.add("disabled");
         e.target["interest"].parentElement.classList.add("disabled");
     }
@@ -65,21 +73,24 @@ class App extends React.Component {
         this.setState(state => {
             return {
                 principalPayment: Number(state.payment - state.interestPayment).toFixed(2),
-                balance: Number(state.balance - Number(state.payment - state.interestPayment).toFixed(2)).toFixed(2),
-                payments: [ ...state.payments, { id: state.payments.length + 1, balance: Number(state.balance - Number(state.payment - state.interestPayment).toFixed(2)).toFixed(2), payment: Number(state.payment).toFixed(2), interest: state.interestPayment, principal: Number(state.payment - state.interestPayment).toFixed(2) } ]
+                balance: Number(state.balance - (state.payment - state.interestPayment)).toFixed(2),
+                payments: [ ...state.payments, { id: state.payments.length + 1, balance: Number(state.balance - (state.payment - state.interestPayment)).toFixed(2), payment: Number(state.payment).toFixed(2), interest: Number(state.interestPayment).toFixed(2), principal: Number(state.payment - state.interestPayment).toFixed(2) } ]
             }
         })
 
         this.setState(state => {
             return {
-                interestPayment: Number(state.interestDisplay / 100 / 12 * state.balance).toFixed(2),
+                interestPayment: Number(state.interest / 100 / 12 * state.balance).toFixed(2),
                 requiredPrincipal: Number(state.balance * .01).toFixed(2),
-                minRequiredPayment: state.balance <= 100 ? Number(state.balance + (state.balance * .01)).toFixed(2) : Number((state.interestDisplay / 100 / 12 * state.balance) + (state.balance * .01)).toFixed(2)
+                minRequiredPayment: Number(state.balance) <= 100 ? (Number(state.balance) + Number(state.balance * .01)).toFixed(2) : Number((state.interest / 100 / 12 * state.balance) + (state.balance * .01)).toFixed(2)
             }
         }) 
 
-        this.setState({
-            payment: ""
+        this.setState(state => {
+            return {
+                payment: "",
+                paymentsRemaining: Number(NPER(state.interest / 100 / 12, -state.minRequiredPayment, state.balance)).toFixed(0)
+            }
         })
 
         e.target["payment"].nextSibling.classList.remove("fa-solid", "fa-check");

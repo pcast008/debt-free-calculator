@@ -1,10 +1,10 @@
 import React from "react";
-import "./PaymentHistory.css"
+import "./PaymentHistory.css";
 
 class PaymentHistory extends React.Component {
     paymentDetailRender(detail) {
         if (detail.length === 0) {
-            return <div className="payment-item">No Payment History</div>
+            return <div className="payment-item">No Payment History</div>;
         } else {
             return detail.map(item => {
                     return <div className="payment-item" key={item.id}>
@@ -19,13 +19,14 @@ class PaymentHistory extends React.Component {
     }
 
     onClick = (e) => {
-        e.target.parentElement.parentElement.querySelector(".payment-history-detail").classList.toggle("hide")
+        e.target.parentElement.parentElement.querySelector(".payment-history-detail").classList.toggle("hide");
+
         if (e.target.classList.contains("fa-chevron-down")) {
-            e.target.classList.remove("fa-chevron-down")
-            e.target.classList.add("fa-chevron-up")
+            e.target.classList.remove("fa-chevron-down");
+            e.target.classList.add("fa-chevron-up");
         } else {
-            e.target.classList.add("fa-chevron-down")
-            e.target.classList.remove("fa-chevron-up")
+            e.target.classList.add("fa-chevron-down");
+            e.target.classList.remove("fa-chevron-up");
         }
     }
 
@@ -44,4 +45,4 @@ class PaymentHistory extends React.Component {
     }
 }
 
-export default PaymentHistory
+export default PaymentHistory;
